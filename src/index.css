@@ -59,12 +59,17 @@ html {
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
 }
 
 html, body {
   /* font-size: clamp(1rem, 1vw, 2em); */
   font-size: max(1vw, 16px);
   font-weight: 400;
+}
+
+*::-webkit-scrollbar {
+  width: 0;
 }
 
 body {

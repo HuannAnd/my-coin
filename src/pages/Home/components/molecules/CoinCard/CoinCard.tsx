@@ -47,7 +47,7 @@ export default function Card({
       </div>
       <div className={styles.bottom}>
         <span className={styles.type}>Crypto</span>
-        <button className={styles.viewMore}>
+        <button onClick={handleOnClick} className={styles.viewMore}>
           <svg className={styles.circle} height="100%" viewBox="0 0 10 10">
             <circle cx="5" cy="5" r="4.9" />
           </svg>

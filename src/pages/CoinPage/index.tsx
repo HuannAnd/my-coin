@@ -1,4 +1,6 @@
+import ResetPageScrollPosition from "@/common/components/layouts/ResetPageScrollPosition"
 import useMetamaskHandles from "@/common/hooks/useMetaMaskHandles"
+
 import useCoin from "./hooks/useCoin"
 import { useSDK as useMetaMask } from "@metamask/sdk-react"
 
@@ -9,7 +11,7 @@ export default function CoinPage() {
   const coin = useCoin()
 
   return (
-    <main>
+    <ResetPageScrollPosition>
       <h1>Coin route {coin?.id}</h1>
       <p>You are not connected</p>
       {connected ? (
@@ -20,6 +22,6 @@ export default function CoinPage() {
       <p>My Balance {balance}</p>
       <p>My Account {account}</p>
       <p>My Chain {chainId}</p>
-    </main>
+    </ResetPageScrollPosition>
   )
 }

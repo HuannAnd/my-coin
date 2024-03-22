@@ -4,12 +4,15 @@ import App from "./App"
 
 import "index.css"
 
+import ResetPageScrollPosition from "@/common/components/layouts/ResetPageScrollPosition"
 import Providers from "@/common/contexts/Providers"
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <Providers>
-      <App />
-    </Providers>
+    <ResetPageScrollPosition>
+      <Providers>
+        <App />
+      </Providers>
+    </ResetPageScrollPosition>
   </React.StrictMode>
 )

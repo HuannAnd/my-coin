@@ -16,6 +16,11 @@
   z-index: 998;
 }
 
+.leftEdge {}
+
+.rightEdge {}
+
+
 .left {
   position: relative;
   height: 100%;
@@ -37,24 +42,6 @@
   border-top: 5px solid #aaa;
 }
 
-.edgeLeft {
-  position: absolute;
-  top: 0;
-  left: 0;
-  
-  transform: translateX(-100%);
-}
-
-.edgeRight {
-  position: absolute;
-  top: 0;
-  right: 0;
-
-  /* border-top: outset 5px solid #aaa; */
-  box-shadow: -5px 10px #aaa o;
-
-  transform: translateX(100%);
-}
 
 .left, .right {
   background-color: #eee;

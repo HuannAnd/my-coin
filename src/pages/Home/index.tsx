@@ -1,19 +1,14 @@
-import useCoins from "./useCoins"
+import ResetPageScrollPosition from "@/common/components/layouts/ResetPageScrollPosition"
 
 import Cryptos from "./components/sections/Cryptos/Cryptos"
 import Hero from "./components/sections/Hero/Hero"
 
-export default function Home() {
-  // const coins = useCoins()
-  // const coinsInMarketCapAscOrd = coins?.toReversed()
 
+export default function Home() {
   return (
-    <>
+    <ResetPageScrollPosition>
       <Hero />
       <Cryptos /> 
-      {/* <h1>Home page</h1> */}
-
-      {/* {coinsInMarketCapAscOrd?.map(x => <Card key={`coin_${x.id}`} coin={x}/>)} */}
-    </>
+    </ResetPageScrollPosition>
   )
 }
