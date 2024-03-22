@@ -1,0 +1,109 @@
+.card {
+  /* padding: var(--gap); */
+  /* padding-bottom: calc(var(--gap) * 0.5); */
+
+  border-radius: 10px;
+  border: 1px solid #ddd;
+}
+
+.top {
+  padding: var(--gap);
+}
+
+.origin {
+}
+
+.address {
+  display: inline-block;
+
+  background-color: #333333;
+  border-radius: 99px;
+  padding: 0.2em 1em;
+
+  color: #fff;
+  font-size: 0.6em;
+}
+
+.domain {
+  float: right;
+
+  margin-left: auto;
+
+  color: #aaa;
+  font-size: 0.6em;
+}
+
+.image {
+  display: block;
+
+  width: 33%;
+  margin-right: auto;
+  padding-top: var(--gap);
+}
+
+.name {
+  padding-top: var(--gap);
+
+  font-size: 1.1rem;
+}
+
+.info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.birthdate {
+  font-size: 0.6em;
+  color: #666666;
+}
+
+.tax {
+  float: right;
+
+  padding: 0.2em 0.5em;
+
+  border: 1px solid #ddd;
+  border-radius: 99px;
+
+  font-size: 1rem;
+}
+
+.abbreviation {
+  text-transform: uppercase;
+  font-size: 0.6em;
+  vertical-align: middle;
+}
+
+.percentage {
+  margin-left: 0.1em;
+
+  font-size: 0.6em;
+  vertical-align: middle;
+}
+
+.percentage[data-percentage-status="negative"] {
+  color: #c60202;
+}
+
+.percentage[data-percentage-status="positive"] {
+  color: #338333;
+}
+
+.bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: calc(var(--gap) * 0.25) var(--gap);
+
+  border-top: 1px solid #ddd;
+}
+
+.viewMore {
+  height: 2rem;
+}
+
+/* .circle {
+  height: 2rem;
+} */

@@ -1,0 +1,113 @@
+@font-face {
+  font-family: "Sarabun", sans-serif;
+  src: url("/fonts/Sarabun-Light.ttf");
+  font-weight: 300;
+}
+
+@font-face {
+  font-family: "Sarabun", sans-serif;
+  src: url("/fonts/Sarabun-Regular.ttf");
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "Sarabun", sans-serif;
+  src: url("/fonts/Sarabun-Medium.ttf");
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Long Shot", sans-serif;
+  src: url("/fonts/Long_Shot.ttf");
+  font-weight: bold;
+}
+
+:root {
+  --container-padding: 12vw;
+  --section-padding: 10vw;
+  --gap-padding: max(2vw, 2.5rem);
+  --gap-padding-bottom: var(--gap-padding);
+  --gap: max(2vw, 1em);
+
+  --header-top-gap: 4.4vw;
+  /* --header-height: 3.75rem; */
+  --header-height: 3.125rem;
+
+  --color-background: #02003A;
+  
+  --font-saburan: "Saburan", sans-serif;
+  --font-long-shot: "Long shot", sans-serif;
+}
+
+@media (width <= 768px) {
+  :root {
+    --container-padding: 6vw;
+  }
+}
+
+*, *::after, *::before {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  box-sizing: border-box;
+  font-family: var(--font-saburan);
+}
+
+html {
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html, body {
+  /* font-size: clamp(1rem, 1vw, 2em); */
+  font-size: max(1vw, 16px);
+  font-weight: 400;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+section {
+  position: relative;
+  padding-top: var(--section-padding);
+  padding-bottom: var(--section-padding);
+}
+
+section:nth-of-type(1) {
+  padding-top: calc(var(--section-padding) + var(--header-height));
+}
+
+.container {
+  padding-left: var(--container-padding);
+  padding-right: var(--container-padding);
+}
+
+/* TYPOGRAPHY */
+
+h1 {
+  font-size: 9.2vw;
+  font-family: var(--font-long-shot);
+  color: #fff;
+  font-smoothing: antialised;
+   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  letter-spacing: calc(9.2vw * ());
+}
+
+p {
+  font-size: max(0.83vw, 1rem);
+  letter-spacing: calc(max(0.83vw, 1rem) * -0.03);
+  font-family: var(--font-saburan);
+}
+
+p.small {
+  font-size: 0.9em;
+}
+
+small {
+  font-size: 0.6em;
+}

@@ -1,0 +1,44 @@
+.cryptos {
+  background-color: #eee;
+}
+
+.upper {
+  padding-block: calc(var(--gap-padding) * 0.5);
+
+  border-bottom: 1px solid #ddd;
+}
+
+.subtitle {
+  font-weight: 300;
+  font-family: var(--font-saburan);
+}
+
+.counter {
+  display: inline-block;
+
+  margin-left: var(--gap);
+
+  color: #aaa;
+  font-size: 0.8em;
+  font-weight: inherit;
+}
+
+.coins {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: calc(2 * var(--gap));
+
+  padding-top: calc(var(--gap) * 4);
+}
+
+@media (480px < width <= 768px) {
+  .coins {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (width <= 480px) {
+  .coins {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
