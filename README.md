@@ -1,3 +1,7 @@
+# Seja bem vindo ao My Coin
+
+<img src="./my-icon.png" style="width: 100%;" />
+
 # Instalattion and run <a name="installation"></a>
 
 Install Node Packgage Manager in your machine Node installation and run the following commands in terminal:
