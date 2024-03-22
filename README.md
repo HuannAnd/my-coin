@@ -1,8 +1,8 @@
-# Seja bem vindo ao My Coin
+# Seja bem vindo ao My Coin! 🎊
 
 <img src="./my-icon.png" style="width: 100%;" />
 
-# Instalattion and run <a name="installation"></a>
+# Instalacao e como Rodar ‍💻
 
 Install Node Packgage Manager in your machine Node installation and run the following commands in terminal:
 
@@ -13,7 +13,7 @@ npm run dev
 
 ```
 
-# Running Tests 
+# Utilizar testes 🧪
 
 After your complete [Installation and run](#instalattion-and-run)
 
@@ -25,10 +25,13 @@ Depois de voce ter completado a fase de [Instalacao](#instalattion-and-run) bast
 
 # Requisitos Funcionais
 
-- Listagem de Criptomoedas: A aplicação deve consumir uma API pública de criptomoedas (como a CoinGecko API) para exibir uma lista das top 10 criptomoedas por capitalização de mercado. Cada item da lista deve incluir o nome da criptomoeda, o símbolo e o preço atual.
+- [ x ] Exibir uma lista de 10 criptomoedas por capitalizacao de mercado;
+- [ x ] Cada item deve incluir o nome da criptomoeda, o simbolo e o preco;
+- [] Ao clicar na moeda o usuario deve ser redirecionado para uma pagina de detalhes, que inclui informacoes mais da mesma como: variacao de 24h, alta e baixa em 24h, volume de mercado;
+- [ x ] Integracao com Wallet Metamask;
+- [ x ] A Wallet Metamask exibi a conexao e o saldo atual de ethereum do usuario;
+- [] Responsividade que garanta boa experiencia;
 
-- Detalhes da Criptomoeda: Ao clicar em uma criptomoeda, o usuário deve ser redirecionado para uma página de detalhes, que inclui informações mais profundas sobre a criptomoeda selecionada, como variação de preço nas últimas 24 horas, alta/baixa de 24h, volume de mercado e gráfico de preço (se possível).
+# Miscellaneous 
 
-- Integração com Wallet: Implemente um botão que permita ao usuário conectar a aplicação a uma wallet Metamask. Não é necessário executar transações, mas a aplicação deve ser capaz de mostrar se a wallet está conectada e exibir o saldo atual de Ethereum do usuário.
-
-- Responsividade: A aplicação deve ser responsiva, garantindo uma boa experiência de usuário em dispositivos móveis e desktops.
+- [] Grafico do preco da moeda se possivel.
