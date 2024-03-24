@@ -23,21 +23,53 @@
   font-weight: bold;
 }
 
-:root {
-  --container-padding: 12vw;
-  --section-padding: 10vw;
-  --gap-padding: max(2vw, 2.5rem);
-  --gap-padding-bottom: var(--gap-padding);
-  --gap: max(2vw, 1em);
+@font-face {
+  font-family: "Saburan", sans-serif;
+  src: url("/fonts/Sarabun-ThinItalic.ttf");
+  font-style: italic;
+  font-weight: 300;
+}
 
-  --header-top-gap: 4.4vw;
-  /* --header-height: 3.75rem; */
+:root {
+  --container-padding: 6.56vw;
+  --section-padding: 8.33vw;
+  --gap-padding: max(1.75em, 1.75vw);
+  --gap-padding-bottom: var(--gap-padding);
+  --gap: min(3vw, 1em);
+
+  --header-top-gap: 7.4dvh;
   --header-height: 3.125rem;
 
-  --color-background: #02003A;
-  
+  --color-white-100: #ffffff;
+  --color-white-200: #fbfbfb;
+  --color-white-300: #ededed;
+  --color-white-400: #aaa;
+
+  --color-black-400: #333;
+  --color-black-300: #444;
+  --color-black-200: #7f8187;
+  --color-black-100: #7b7e86;
+
+  --color-blue: #506ead;
+
+  --color-pink-100: #e084ff;
+  --color-pink-200: #ff016b;
+
+  --color-red: #e71a1a;
+
+  --color-green-100: #37ae37;
+  --color-green-200: #55bd24;
+
+  --color-background: var(--color-white-100);
+
+  --color-subtitle: #7b7e86;
+
   --font-saburan: "Saburan", sans-serif;
   --font-long-shot: "Long shot", sans-serif;
+
+  --animation-bezier-fast: cubic-bezier(0.4, 0, 0, 1);
+  --animation-bezier-smooth: cubic-bezier(0.25, 0, 0.75, 1);
+  --animation-toward: 0.65s cubic-bezier(0.19, 1, 0.22, 1);
 }
 
 @media (width <= 768px) {
@@ -46,7 +78,9 @@
   }
 }
 
-*, *::after, *::before {
+*,
+*::after,
+*::before {
   margin: 0;
   padding: 0;
   border: 0;
@@ -55,14 +89,24 @@
 }
 
 html {
-  font-synthesis: none;
+  font-size: clamp(1em, 1.3vw, 1.75em);
+
   text-rendering: optimizeLegibility;
+  font-smooth: never;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
   overflow-x: hidden;
 }
 
-html, body {
+@media (orientation: portrait) {
+  html {
+    font-size: calc(clamp(1em, 1.3vw, 1.75em) * 1.143125);
+  }
+}
+
+html,
+body {
   /* font-size: clamp(1rem, 1vw, 2em); */
   font-size: max(1vw, 16px);
   font-weight: 400;
@@ -94,19 +138,31 @@ section:nth-of-type(1) {
 /* TYPOGRAPHY */
 
 h1 {
-  font-size: 9.2vw;
-  font-family: var(--font-long-shot);
-  color: #fff;
-  font-smoothing: antialised;
-   -webkit-font-smoothing: antialiased;
+  font-size: 4.375vw;
+  letter-spacing: calc(4.375vw * 0.95);
+  font-style: italic;
+  font-weight: 300;
+  font-family: var(--font-saburan);
+  text-transform: uppercase;
+  color: var(--color-blue);
+
+  font-smooth: always;
+  -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  letter-spacing: calc(9.2vw * ());
+}
+
+h2 {
+  font-size: 6.5625vw;
+  letter-spacing: calc(6.5625vw * -0.04);
+  color: var(--color-subtitle, #7b7e86);
+  font-weight: 400;
 }
 
 p {
-  font-size: max(0.83vw, 1rem);
-  letter-spacing: calc(max(0.83vw, 1rem) * -0.03);
+  font-size: 0.875rem;
+  letter-spacing: calc(0.875rem * - 0.03rem);
   font-family: var(--font-saburan);
+  font-weight: 400;
 }
 
 p.small {
@@ -115,4 +171,21 @@ p.small {
 
 small {
   font-size: 0.6em;
+}
+
+@media (orientation: portrait) {
+  :root {
+    --container-padding: 16px;
+    --section-padding: 31.3vw;
+  }
+
+  h2 {
+    font-size: 9.4vw;
+  }
+}
+
+@media (width <=480px) {
+  h1 {
+    font-size: 15vw;
+  }
 }

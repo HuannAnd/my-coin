@@ -8,9 +8,11 @@
 
 .top {
   padding: var(--gap);
+  padding-bottom: calc(3.4 * var(--gap));
 }
 
 .origin {
+  padding-bottom: calc(1.4 * var(--gap));
 }
 
 .address {
@@ -21,7 +23,7 @@
   padding: 0.2em 1em;
 
   color: #fff;
-  font-size: 0.6em;
+  font-size: 0.5625rem;
 }
 
 .domain {
@@ -30,36 +32,40 @@
   margin-left: auto;
 
   color: #aaa;
-  font-size: 0.6em;
+  font-size: 0.5625rem;
 }
 
 .image {
   display: block;
 
-  width: 33%;
+  height: 94px;
   margin-right: auto;
-  padding-top: var(--gap);
 }
 
 .name {
-  padding-top: var(--gap);
+  padding-top: calc(2.3752 * var(--gap));
 
-  font-size: 1.1rem;
+  font-size: 1rem;
 }
 
 .info {
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  padding-top: calc(0.36 * var(--gap));
 }
 
 .birthdate {
-  font-size: 0.6em;
+  font-size: 0.875rem;
   color: #666666;
 }
 
 .tax {
+  display: inline-flex;
   float: right;
+  align-items: center;
+  gap: 0.04em;
 
   padding: 0.2em 0.5em;
 
@@ -69,17 +75,23 @@
   font-size: 1rem;
 }
 
+.miniImage {
+  height: 0.75rem;
+
+}
+
 .abbreviation {
   text-transform: uppercase;
-  font-size: 0.6em;
-  vertical-align: middle;
+  font-size: 0.75rem;
 }
 
 .percentage {
-  margin-left: 0.1em;
+  float: right;
+  vertical-align: middle; 
 
-  font-size: 0.6em;
-  vertical-align: middle;
+  padding-right: 0.5em;
+
+  font-size: 0.5625rem;
 }
 
 .percentage[data-percentage-status="negative"] {
@@ -95,13 +107,24 @@
   justify-content: space-between;
   align-items: center;
 
-  padding: calc(var(--gap) * 0.25) var(--gap);
+  padding: calc(var(--gap) * 0.5) var(--gap);
 
   border-top: 1px solid #ddd;
 }
 
+.type {
+  padding-left: 1rem;
+
+  font-size: 1rem;
+
+  border-left: 1px solid var(--color-pink-200);
+  
+}
+
 .viewMore {
   height: 2rem;
+
+  background-color: transparent;
 }
 
 /* .circle {

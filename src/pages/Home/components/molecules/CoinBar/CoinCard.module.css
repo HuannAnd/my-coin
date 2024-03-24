@@ -1,0 +1,22 @@
+.bar {
+  display: inline-flex;
+  float: right;
+  align-items: center;
+  gap: 0.04em;
+
+  padding: 0.2em 0.5em;
+
+  border: 1px solid #ddd;
+  border-radius: 99px;
+
+  font-size: 1.7rem;
+}
+
+.image {
+  height: 1.1rem;
+}
+
+.abbreviation {
+  text-transform: uppercase;
+  font-size: 0.75rem;
+}

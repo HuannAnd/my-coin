@@ -1,0 +1,9 @@
+.base {
+
+}
+
+@media(width <= 480px) {
+  .base {
+    display: none;
+  }
+}

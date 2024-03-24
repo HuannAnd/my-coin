@@ -1,25 +1,24 @@
-
 .header {
   position: fixed;
   top: var(--header-top-gap);
-  left: var(--container-padding);
-  right: var(--container-padding);
 
   display: flex;
-  gap: calc(var(--gap) * 10);
-  justify-content: space-between;
+  justify-content: right;
 
   height: var(--header-height);
+  width: 100vw;
+  padding-inline: var(--container-padding);
 
-  background: transparent; 
+  background: transparent;
 
   z-index: 998;
 }
 
-.leftEdge {}
+.leftEdge {
+}
 
-.rightEdge {}
-
+.rightEdge {
+}
 
 .left {
   position: relative;
@@ -30,7 +29,7 @@
 
 .right {
   position: relative;
-  
+
   display: flex;
   flex-direction: row;
   gap: calc(var(--gap) * 5.5);
@@ -38,12 +37,11 @@
   padding-left: var(--gap);
   padding-right: 6.25rem;
 
-  
   border-top: 5px solid #aaa;
 }
 
-
-.left, .right {
+.left,
+.right {
   background-color: #eee;
   padding-block: calc(var(--header-height) * 0.125);
 }
@@ -114,9 +112,8 @@
   border-radius: 50%;
 
   transform: translateX(calc(-50% - (0.3 * var(--header-height))));
-
 }
 
 .avatar {
   height: calc(var(--header-height) * 0.85);
-} 
+}

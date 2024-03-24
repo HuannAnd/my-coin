@@ -10,5 +10,6 @@ export default function useCoins() {
     queryFn: async () => await CoinGeckoHttpClient.getTopCoins(),
   })
 
+  console.log("coins", coins)
   return coins
 }

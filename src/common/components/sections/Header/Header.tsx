@@ -7,7 +7,7 @@ import styles from "./Header.module.css"
 import LeftEdge from "./LeftEdge/LeftEdge"
 import RightEdge from "./RightEdge/RightEdge"
 
-import ControlHeaderOnScroll from "./ControlHeadorOnScroll"
+import ControlHeaderOnScroll from "./HeaderControllOnScrolling"
 
 function Rovering() {
   return <svg width="100%" className={styles.covering} viewBox=""></svg>

@@ -3,6 +3,7 @@ import ReactDOM from "react-dom/client"
 import App from "./App"
 
 import "index.css"
+import "./lenis.css"
 
 import ResetPageScrollPosition from "@/common/components/layouts/ResetPageScrollPosition"
 import Providers from "@/common/contexts/Providers"

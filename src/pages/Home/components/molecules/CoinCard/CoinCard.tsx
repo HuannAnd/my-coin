@@ -1,7 +1,8 @@
 import { ICoin } from "@/services/responses/CoinGeckoResponses"
-import { useNavigate } from "react-router-dom"
+import { redirect, useNavigate } from "react-router-dom"
 
 import styles from "./CoinCard.module.css"
+import useLenisScroll from "@/common/hooks/useLenisScroll"
 
 interface Props extends ICoin {}
 export default function Card({
@@ -14,11 +15,18 @@ export default function Card({
   ...rest
 }: Props) {
   const navigate = useNavigate()
+  const lenis = useLenisScroll()
+
   const percentageInNumber = Number(price_change_percentage_24h)
   const percentageStatus = percentageInNumber < 0 ? "negative" : "positive"
   const isPositiveNumber = percentageStatus === "positive"
 
-  const handleOnClick = () => navigate(`coin/${id}`)
+  const redirectToCoinPage = () => navigate(`coin/${id}`)
+
+  function handleOnClick() {
+    redirectToCoinPage()
+    lenis?.scrollTo(0, { force: true, immediate: true })
+  }
 
   return (
     <article className={styles.card}>
@@ -28,33 +36,42 @@ export default function Card({
           <span className={styles.domain}>/bitcoin.org/</span>
         </div>
         <img className={styles.image} src={image} alt="Crypto image" />
-        <p className={styles.name}>{name}</p>
+        <p className={styles.name}>
+          {name}
+          <strong
+            className={styles.percentage}
+            data-percentage-status={percentageStatus}
+          >
+            {isPositiveNumber && "+"}
+            {price_change_percentage_24h.toFixed(2)}
+            {"%"}
+          </strong>
+        </p>
         <div className={styles.info}>
           <span className={styles.birthdate}>USA 2022</span>
           <span className={styles.tax}>
-            {/* <img src="" alt="" /> */}
+            <img
+              className={styles.miniImage}
+              src={image}
+              alt="Crypto Logo image"
+            />
             <abbr className={styles.abbreviation}>{symbol}</abbr>
-            <strong
-              className={styles.percentage}
-              data-percentage-status={percentageStatus}
-            >
-              {isPositiveNumber && "+"}
-              {price_change_percentage_24h.toFixed(2)}
-              {"%"}
-            </strong>
           </span>
         </div>
       </div>
       <div className={styles.bottom}>
         <span className={styles.type}>Crypto</span>
         <button onClick={handleOnClick} className={styles.viewMore}>
-          <svg className={styles.circle} height="100%" viewBox="0 0 10 10">
-            <circle cx="5" cy="5" r="4.9" />
+          <svg
+            className={styles.circle}
+            fill="none"
+            height="100%"
+            viewBox="0 0 10 10"
+          >
+            <circle fill="var(--color-black-400)" cx="5" cy="5" r="4.9" />
           </svg>
         </button>
       </div>
-      {/* <p>{JSON.stringify({ id, ...rest })}</p> */}
-      {/* <button onClick={handleOnClick}>Go to coin url</button> */}
     </article>
   )
 }

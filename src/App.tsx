@@ -5,17 +5,20 @@ import CoinPage from "./pages/CoinPage"
 
 import Header from "./common/components/sections/Header/Header"
 import ResetPageScrollPosition from "@/common/components/layouts/ResetPageScrollPosition"
+import LenisScrollProvider from "./common/contexts/LenisScrollProvider"
 
 export default function App() {
   return (
-    <BrowserRouter>
-      <ResetPageScrollPosition>
-        <Header />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/coin/:id" element={<CoinPage />} />
-        </Routes>
-      </ResetPageScrollPosition>
-    </BrowserRouter>
+    <LenisScrollProvider>
+      <BrowserRouter>
+        <ResetPageScrollPosition>
+          {/* <Header /> */}
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/coin/:id" element={<CoinPage />} />
+          </Routes>
+        </ResetPageScrollPosition>
+      </BrowserRouter>
+    </LenisScrollProvider>
   )
 }
