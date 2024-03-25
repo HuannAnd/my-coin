@@ -25,14 +25,13 @@ class CanddleStick {
       close: this.normalize!(this.ohlc.close),
     }
 
-    console.log("normalize: ", this.normalize)
     const x =
       this.index * (CANDDLE_WIDTH + SPACE_BET_CANDDLE) + SPACE_BET_CANDDLE
-    const y = ohlcMapped.close
+    const y = ohlcMapped.open
 
     const width = CANDDLE_WIDTH
-    const tranformY = -1
-    const height = tranformY * Math.abs(ohlcMapped.close - ohlcMapped.open)
+    // const tranformY = -1
+    const height = y - ohlcMapped.close
     const fill = this.ohlc.open < this.ohlc.close ? "#ff0000" : "#00ff00"
 
     context.fillStyle = fill

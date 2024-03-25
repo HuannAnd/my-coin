@@ -35,6 +35,34 @@
   color: var(--color-green-100);
 }
 
+.info {
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--gap) * 0.5);
+  
+  flex-grow: 1;
+}
+
+.data {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  font-size: 1rem;
+}
+
+.resource {
+  width: max-content;
+  
+  font-size: 0.8rem;
+}
+
+.value {
+  font-size: 0.75em;
+}
+
+
+
 .canddleStickGraphic {
   grid-column: 2 / -1;
   /* border: 1px solid var(--color-red); */

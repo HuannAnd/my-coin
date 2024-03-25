@@ -1,5 +1,4 @@
 import CoinGeckoHttpClient from "@/services/CoinGeckoHttpClient"
-
 import { useQuery } from "react-query"
 import { useParams } from "react-router-dom"
 
