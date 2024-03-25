@@ -26,3 +26,16 @@ export interface ICoin {
   roi: any
   last_updated: string
 }
+
+export interface ICoinDetailsResponse {
+  tickers: Ticker[],
+  name: string,
+}
+
+export type ICoinOHLCResponse = (number[])[]
+
+interface Ticker {
+  converted_last: {
+    usd: number
+  }
+}

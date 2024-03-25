@@ -1,0 +1,47 @@
+.subtitle {
+  padding-bottom: calc(3.084 * var(--gap));
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0;
+}
+
+.top {
+  display: flex ;
+  justify-content: space-between;
+  align-items: center;
+
+  padding-bottom: calc(2.163 * var(--gap));
+}
+
+.price {
+  font-size: 1.8rem;
+}
+
+.priceVariationInPercentage {
+  float: right;
+  vertical-align: middle;
+
+  font-size: 1rem;
+}
+
+.priceVariationInPercentage[data-percentage-status="negative"] {
+  color: var(--color-red);
+}
+
+.priceVariationInPercentage[data-percentage-status="positive"] {
+  color: var(--color-green-100);
+}
+
+.canddleStickGraphic {
+  grid-column: 2 / -1;
+  /* border: 1px solid var(--color-red); */
+}
+
+@media (orientation: portrait) {
+  .subtitle {
+    text-align: center;
+  }
+}

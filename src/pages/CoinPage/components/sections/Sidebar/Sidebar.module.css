@@ -1,0 +1,6 @@
+.sidebar {
+  min-height: 100dvh;
+  padding-right: var(--gap);
+
+  z-index: 998;
+}

@@ -39,9 +39,7 @@ export default function Hero() {
               />
             </svg>
           </div>
-          <SlideUpTextFromView once start="top bottom" delay={1}>
-            <p className={styles.scrollDown}>SCROLL DOWN</p>
-          </SlideUpTextFromView>
+          <p className={styles.scrollDown}>SCROLL DOWN</p>
         </div>
         <GradientBlur className={styles.gradientBlur} />
       </section>

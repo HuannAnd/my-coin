@@ -1,51 +1,83 @@
+.col {
+  padding: var(--gap);
+
+  list-style: none;
+}
 .card {
-  /* padding: var(--gap); */
-  /* padding-bottom: calc(var(--gap) * 0.5); */
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
 
   border-radius: 10px;
-  border: 1px solid #ddd;
+  border: 1px solid #ededed;
 }
 
 .top {
-  padding: var(--gap);
+  padding: calc(var(--gap) * 2);
   padding-bottom: calc(3.4 * var(--gap));
 }
 
 .origin {
+  display: flex;
+  align-items: center;
+
   padding-bottom: calc(1.4 * var(--gap));
 }
 
-.address {
+.address,
+.type,
+.bar {
   display: inline-block;
 
-  background-color: #333333;
   border-radius: 99px;
-  padding: 0.2em 1em;
+  padding: 0.4em 1em;
 
-  color: #fff;
+  color: var(--color-white-300);
   font-size: 0.5625rem;
 }
 
-.domain {
-  float: right;
+.address {
+  background-color: var(--color-black-400);
+}
 
-  margin-left: auto;
+.type {
+  background-color: var(--color-black-100);
+}
 
-  color: #aaa;
+.bar {
+  display: inline-flex;
+  gap: 0.4em;
+  padding: 0.4em 1em;
+
+  color: var(--color-black-300);
+
   font-size: 0.5625rem;
 }
 
 .image {
   display: block;
 
-  height: 94px;
-  margin-right: auto;
+  height: 5.414375rem;
+  margin-inline: auto;
+}
+
+.about {
+  display: flex;
+  justify-content: space-between;
+
+  padding-top: calc(2.3752 * var(--gap));
 }
 
 .name {
-  padding-top: calc(2.3752 * var(--gap));
-
   font-size: 1rem;
+  text-overflow: ellipsis;
+}
+
+.price {
+  display: block;
+  width: max-content;
+
+  font-size: 0.75rem;
 }
 
 .info {
@@ -57,37 +89,13 @@
 }
 
 .birthdate {
-  font-size: 0.875rem;
-  color: #666666;
-}
-
-.tax {
-  display: inline-flex;
-  float: right;
-  align-items: center;
-  gap: 0.04em;
-
-  padding: 0.2em 0.5em;
-
-  border: 1px solid #ddd;
-  border-radius: 99px;
-
-  font-size: 1rem;
-}
-
-.miniImage {
-  height: 0.75rem;
-
-}
-
-.abbreviation {
-  text-transform: uppercase;
   font-size: 0.75rem;
+  color: #666666;
 }
 
 .percentage {
   float: right;
-  vertical-align: middle; 
+  vertical-align: middle;
 
   padding-right: 0.5em;
 
@@ -107,26 +115,20 @@
   justify-content: space-between;
   align-items: center;
 
-  padding: calc(var(--gap) * 0.5) var(--gap);
+  padding: calc(var(--gap) * 0.5) calc(var(--gap) * 2);
 
   border-top: 1px solid #ddd;
 }
 
-.type {
-  padding-left: 1rem;
-
+.details {
   font-size: 1rem;
-
-  border-left: 1px solid var(--color-pink-200);
-  
 }
 
 .viewMore {
   height: 2rem;
 
   background-color: transparent;
+
+  cursor: pointer;
 }
 
-/* .circle {
-  height: 2rem;
-} */
