@@ -1,3 +1,7 @@
+.page {
+  height: 100dvh;
+}
+
 .subtitle {
   padding-bottom: calc(3.084 * var(--gap));
 }
@@ -8,8 +12,27 @@
   gap: 0;
 }
 
+.sidebar {
+  position: sticky;
+  top: 0;
+
+  display: flex;
+  flex-direction: column;
+
+  padding-right: var(--gap);
+
+  border-right: 1px solid var(--color-white-300);
+  
+  z-index: 998;
+}
+
+.canddleStickChart {
+  grid-column: 2 / canddleStickGraphic-1;
+  width: 100%;
+}
+
 .top {
-  display: flex ;
+  display: flex;
   justify-content: space-between;
   align-items: center;
 
@@ -39,7 +62,9 @@
   display: flex;
   flex-direction: column;
   gap: calc(var(--gap) * 0.5);
-  
+
+
+
   flex-grow: 1;
 }
 
@@ -53,7 +78,7 @@
 
 .resource {
   width: max-content;
-  
+
   font-size: 0.8rem;
 }
 
@@ -61,15 +86,18 @@
   font-size: 0.75em;
 }
 
-
-
 .canddleStickGraphic {
   grid-column: 2 / -1;
   /* border: 1px solid var(--color-red); */
 }
 
 @media (orientation: portrait) {
+}
+
+@media (width <= 480px ) {
   .subtitle {
     text-align: center;
   }
 }
+
+

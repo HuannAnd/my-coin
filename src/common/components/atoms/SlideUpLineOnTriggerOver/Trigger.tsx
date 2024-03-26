@@ -4,6 +4,8 @@ import gsap from "gsap"
 
 import useTriggerRef from "./useTriggerRef"
 import applyRefToChildren from "@/common/utils/apply-ref-to-children"
+import BodyManager from "@/common/utils/BodyManager"
+import { MetamaskConnectionStatusEnum } from "@/common/enums/MetamskEnums"
 
 interface Props extends React.PropsWithChildren {}
 export default function Trigger({ children }: Props) {
@@ -29,6 +31,9 @@ export default function Trigger({ children }: Props) {
       context.add("slideLoop", async () => {
         if (isAnimating) return
         isAnimating = true
+        const isConnected = BodyManager.getMetamaskConnectionStatus() === MetamaskConnectionStatusEnum.CONNECTED
+
+        if(isConnected) return
 
         await timeline
           .to(ref.current, {

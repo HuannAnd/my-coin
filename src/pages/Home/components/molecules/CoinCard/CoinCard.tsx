@@ -65,7 +65,7 @@ export default function Card({
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
           >
-            <circle cx="13" cy="13" r="13" fill="#333333" />
+            <circle cx="13" cy="13" r="12.75" fill="#000" />
             <path d="M11 9L15 13L11 17" stroke="white" />
           </svg>
         </button>

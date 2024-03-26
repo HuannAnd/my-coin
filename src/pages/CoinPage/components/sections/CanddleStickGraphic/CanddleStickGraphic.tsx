@@ -1,24 +1,39 @@
 import { useEffect, useMemo, useRef, useState } from "react"
-import useMockedOHSL from "@/common/hooks/useMockedOHLC"
+
 import CanddleStick from "./CanddleStickChart"
 
-import { OHLC } from "@/common/types/OHLC"
 import getMinMaxPrices from "@/common/utils/get-min-max-prices"
+import useCoinOHLC from "@/common/hooks/useCoinOHLC"
 import { CANVAS_HEIGHT, CANVAS_WIDTH } from "./CanvaMeasures"
 
 interface Props extends React.CanvasHTMLAttributes<HTMLCanvasElement> {}
 
 export default function CanddleStickGraphic({ ...props }: Props) {
   const ref = useRef<HTMLCanvasElement>(null)
+  const [scaleY, setScaleY] = useState(1)
 
   const [context, setContext] = useState<CanvasRenderingContext2D | null>(null)
   // const canvasViewports = useCanvasViewports()
-  // const ohlc = useCoinOHLC()
-  const mockedOhlcResource = useMockedOHSL()
+  const mockedOhlcResource = useCoinOHLC()
+  // const mockedOhlcResource = useMockedOHSL()
   const { min, max } = useMemo(
     () => getMinMaxPrices(mockedOhlcResource),
     [mockedOhlcResource]
   )
+
+  useEffect(function mouseWheelScalingCanddles() {
+    function scalingCanddles(event: WheelEvent) {
+      const newCanddleScale = event.deltaY
+
+      setScaleY(newCanddleScale)
+    }
+
+    window.addEventListener("wheel", scalingCanddles)
+
+    return () => {
+      window.removeEventListener("wheel", scalingCanddles)
+    }
+  }, [])
 
   useEffect(
     function drawingChart() {
@@ -26,10 +41,8 @@ export default function CanddleStickGraphic({ ...props }: Props) {
       if (mockedOhlcResource?.length < 1) return
 
       if (context) {
-        // context.setTransform(1, 0, 0, -1, 0, CANVAS_HEIGHT)
-
         mockedOhlcResource.forEach((x, i) => {
-          const canddleStick = new CanddleStick(x as unknown as OHLC, i)
+          const canddleStick = new CanddleStick(x, i, CANVAS_WIDTH * scaleY)
           canddleStick.setNormalize(min, max, 0, CANVAS_HEIGHT)
           canddleStick.draw(context)
         })
@@ -40,11 +53,10 @@ export default function CanddleStickGraphic({ ...props }: Props) {
       }
 
       return () => {
-        // context?.clearRect(0, 0, , CANVAS_HEIGHT)
         context?.restore()
       }
     },
-    [context, mockedOhlcResource]
+    [context, mockedOhlcResource, scaleY]
   )
 
   useEffect(

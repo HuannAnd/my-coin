@@ -1,15 +1,35 @@
 import { useSDK as useMetaMaskSDK } from "@metamask/sdk-react"
-import { useEffect, useEffect as useHandleSDKStatusEvent, useLayoutEffect, useState } from "react"
+import {
+  useCallback,
+  useEffect as useHandleSDKStatusEvent,
+  useLayoutEffect,
+  useState,
+} from "react"
 import useLenisScroll from "./useLenisScroll"
+import { useQuery } from "react-query"
+import getEthereumBalance from "../utils/getEthreumBalance/getEthereumBalance"
 
 export default function useMetaMaskHandles() {
-  const [isInstalled, setIsInstalled] = useState<boolean | null>(null)
-  const { sdk, status } = useMetaMaskSDK()
+  const [isInstalled, setIsInstalled] = useState<boolean>()
+  const {
+    sdk,
+    status,
+    balance: balanceHashed,
+    provider,
+    account,
+  } = useMetaMaskSDK()
   const lenis = useLenisScroll()
 
+  const { data: balance } = useQuery({
+    queryKey: account,
+    initialData: 0,
+    placeholderData: 0,
+    queryFn: async () => await getEthereumBalance(balanceHashed),
+  })
+
   useLayoutEffect(function verifiyingMetamaskIsInstalled() {
-    setIsInstalled(window.ethereum !== "undefined")
-  } , [])
+    setIsInstalled(typeof window.ethereum !== "undefined")
+  }, [])
 
   console.log("Metamask instalattion is:", isInstalled)
 
@@ -37,5 +57,6 @@ export default function useMetaMaskHandles() {
   return {
     handleConnect,
     handleDisconnect,
+    balance,
   }
 }
