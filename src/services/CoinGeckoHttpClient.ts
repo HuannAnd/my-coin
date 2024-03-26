@@ -1,5 +1,5 @@
-import { toNamespacedPath } from "path"
 import { BaseHttpClient } from "./BaseHttpClient"
+
 import CurrencyEnum from "./enums/Currency"
 import OrderEnum from "./enums/Order"
 

@@ -154,6 +154,7 @@ h1 {
 h2 {
   font-size: 5.46875vw;
   letter-spacing: calc(5.46875vw * -0.04);
+  line-height: 1;
   color: var(--color-subtitle, #7b7e86);
   font-weight: 400;
 }

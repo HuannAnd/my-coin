@@ -9,6 +9,7 @@
   border: 1px solid #ddd;
   border-radius: 99px;
 
+  cursor: pointer;
 }
 
 .image {

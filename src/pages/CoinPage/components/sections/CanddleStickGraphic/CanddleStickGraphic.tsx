@@ -1,71 +1,70 @@
-import { useLayoutEffect, useMemo, useRef, useState } from "react"
+import { useEffect, useMemo, useRef, useState } from "react"
 import useMockedOHSL from "@/common/hooks/useMockedOHLC"
-import useCanvasViewports from "./useCanvasViewports"
-
 import CanddleStick from "./CanddleStickChart"
-import { CANVAS_WIDTH } from "./CanvaMeasures"
+
 import { OHLC } from "@/common/types/OHLC"
+import getMinMaxPrices from "@/common/utils/get-min-max-prices"
+import { CANVAS_HEIGHT, CANVAS_WIDTH } from "./CanvaMeasures"
 
-
-interface Props extends React.CanvasHTMLAttributes<HTMLCanvasElement> { }
+interface Props extends React.CanvasHTMLAttributes<HTMLCanvasElement> {}
 
 export default function CanddleStickGraphic({ ...props }: Props) {
-  const canvasViewports = useCanvasViewports()
   const ref = useRef<HTMLCanvasElement>(null)
+
   const [context, setContext] = useState<CanvasRenderingContext2D | null>(null)
+  // const canvasViewports = useCanvasViewports()
   // const ohlc = useCoinOHLC()
   const mockedOhlcResource = useMockedOHSL()
+  const { min, max } = useMemo(
+    () => getMinMaxPrices(mockedOhlcResource),
+    [mockedOhlcResource]
+  )
 
-  const { min, max } = useMemo(function getMinMaxPrices() {
-    if (!mockedOhlcResource || mockedOhlcResource.length < 1) return { min: 0, max: 0 } // Valor padrão se não houver dados
+  useEffect(
+    function drawingChart() {
+      if (!mockedOhlcResource) return
+      if (mockedOhlcResource?.length < 1) return
 
-    const greaterAvaluated = mockedOhlcResource
-      .map(({ open, close, high, low }) => Math.max(open, close, high, low))
-      .sort((a, b) => a - b)
+      if (context) {
+        // context.setTransform(1, 0, 0, -1, 0, CANVAS_HEIGHT)
 
-    return {
-      min: greaterAvaluated[0],
-      max: greaterAvaluated[greaterAvaluated.length - 1],
-    }
-  }, [mockedOhlcResource])
+        mockedOhlcResource.forEach((x, i) => {
+          const canddleStick = new CanddleStick(x as unknown as OHLC, i)
+          canddleStick.setNormalize(min, max, 0, CANVAS_HEIGHT)
+          canddleStick.draw(context)
+        })
 
-  const drawChart = (ctx: CanvasRenderingContext2D) => {
-    console.log("inside drawChart")
-    if (!mockedOhlcResource) return
-    if (mockedOhlcResource?.length < 1) return
-    console.log("ohlc have more than one")
-    if (ctx) {
-      mockedOhlcResource.forEach((x, i) => {
-        console.log("OHLC single data:", x)
-        const canddleStick = new CanddleStick(x as unknown as OHLC, i)
-        canddleStick.setNormalize(min, max, 0, canvasViewports.height)
-        canddleStick.draw(ctx)
-      })
+        context.fill()
+      } else {
+        console.error("No context found")
+      }
 
-      ctx.fill()
-    } else {
-      console.error("No context found")
-    }
-  }
+      return () => {
+        // context?.clearRect(0, 0, , CANVAS_HEIGHT)
+        context?.restore()
+      }
+    },
+    [context, mockedOhlcResource]
+  )
 
-  useLayoutEffect(function handleOnCanvas() {
-    if (!ref.current) return
-    const canvas = ref.current
-    canvas.width = canvasViewports.width
-    canvas.height = canvasViewports.height
+  useEffect(
+    function initCanvasContext() {
+      const canvas = ref.current!
 
-    if (canvas) {
-      const context = canvas.getContext("2d")
-      setContext(context)
-      context && drawChart(context!)
-    }
+      if (canvas) {
+        const context = canvas.getContext("2d")
+        setContext(context)
+      }
 
-    return () => { }
-  }, [setContext, mockedOhlcResource, canvasViewports])
+      return () => {}
+    },
+    [setContext, mockedOhlcResource]
+  )
 
   return (
     <canvas
       width={CANVAS_WIDTH}
+      height={CANVAS_HEIGHT}
       ref={ref}
       {...props}
     ></canvas>

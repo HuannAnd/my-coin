@@ -23,7 +23,7 @@ export default function CryptosLoadingOnScrollView({ children }: Props) {
 
   useLayoutEffect(() => {
     gsap.registerPlugin(ScrollTrigger)
-    SplitType.create(`.${styles.subtitle}`, { types: "words,chars" })
+    // SplitType.create(`.${styles.subtitle}`, { types: "words,chars" })
     let mm = gsap.matchMedia()
 
     mm.add(
@@ -70,7 +70,7 @@ export default function CryptosLoadingOnScrollView({ children }: Props) {
             trigger: ref.current,
             markers: true,
             once: true,
-            start: "top 25%",
+            start: "top 35%",
             onEnter: () => context.onScrollView(),
           })
         }

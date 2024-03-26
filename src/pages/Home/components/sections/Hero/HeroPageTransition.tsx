@@ -9,7 +9,7 @@ import styles from "./Hero.module.css"
 import { useLayoutEffect, useRef } from "react"
 
 import SplitType from "split-type"
-
+import useLenisScroll from "@/common/hooks/useLenisScroll"
 
 interface Props extends React.PropsWithChildren {}
 
@@ -18,6 +18,7 @@ const SINGLE_WORD_REVEAL_DURATION_IN_SECONDS = 2.2
 
 export default function HeroPageTransition({ children }: Props) {
   const ref = useRef<HTMLElement>(null)
+  const lenis = useLenisScroll()
 
   useLayoutEffect(() => {
     SplitType.create(`.${styles.scrollDown}`, { types: "words,chars" })
@@ -41,16 +42,18 @@ export default function HeroPageTransition({ children }: Props) {
       context.add("scrollDownSlideUp", () =>
         slideUpTextByTimeline(timeline, {
           trigger: styles.scrollDown,
-          delay: 1
+          onComplete: () => lenis?.start(),
+          delay: 1,
         })
       )
     }, ref)
 
+    lenis?.stop()
     animate.scrollDownSlideUp()
     animate.revealTitle()
 
     return () => animate.revert()
-  }, [])
+  }, [lenis])
 
   return applyRefToChildren(ref, children)
 }

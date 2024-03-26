@@ -1,6 +1,7 @@
 import { OHLC } from "@/common/types/OHLC"
 
-import { CANDDLE_WIDTH, SPACE_BET_CANDDLE } from "./CanvaMeasures"
+import { CANDDLE_WIDTH, CANVAS_HEIGHT, SPACE_BET_CANDDLE } from "./CanvaMeasures"
+
 import linearInterpolation from "@/common/utils/linear-interpolation"
 
 class CanddleStick {
@@ -16,8 +17,8 @@ class CanddleStick {
       linearInterpolation(num, minPrice, maxPrice, minHeight, maxHeight)
   }
   public draw(context: CanvasRenderingContext2D) {
-    context.beginPath()
-
+    
+    
     const ohlcMapped = {
       high: this.normalize!(this.ohlc.high),
       low: this.normalize!(this.ohlc.low),
@@ -26,22 +27,29 @@ class CanddleStick {
     }
 
     const x =
-      this.index * (CANDDLE_WIDTH + SPACE_BET_CANDDLE) + SPACE_BET_CANDDLE
-    const y = ohlcMapped.open
-
+    this.index * (CANDDLE_WIDTH + SPACE_BET_CANDDLE) + SPACE_BET_CANDDLE
+    const openIsGreaterThanClose = this.ohlc.open > this.ohlc.close 
+    const y = !openIsGreaterThanClose ? this.ohlc.open : this.ohlc.close
+    
     const width = CANDDLE_WIDTH
-    // const tranformY = -1
-    const height = y - ohlcMapped.close
-    const fill = this.ohlc.open < this.ohlc.close ? "#ff0000" : "#00ff00"
+    const height = Math.abs(ohlcMapped.close - ohlcMapped.open)
 
+    const fill = openIsGreaterThanClose ? "#ff0000" : "#00ff00"
+    
+    context.beginPath()
     context.fillStyle = fill
     context.fillRect(x, y, width, height)
+    context.fill()
 
-    // Desenhando agora as sombras de low e high
-    context.beginPath()
-    context.moveTo(x + CANDDLE_WIDTH / 2, ohlcMapped.high)
-    context.lineTo(x + CANDDLE_WIDTH / 2, ohlcMapped.low)
-    context.stroke()
+    // context.fillText(`${ohlcMapped.close}`, x, this.ohlc.close)
+
+    // const strokeColor = fill
+    // // Desenhando agora as sombras de low e high
+    // context.strokeStyle = strokeColor
+    // context.beginPath()
+    // context.moveTo(x + CANDDLE_WIDTH / 2, ohlcMapped.low)
+    // context.lineTo(x + CANDDLE_WIDTH / 2, ohlcMapped.high)
+    // context.stroke()
   }
 }
 

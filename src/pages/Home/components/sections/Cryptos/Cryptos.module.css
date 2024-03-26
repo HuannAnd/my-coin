@@ -1,5 +1,4 @@
 .cryptos {
-  /* background-color: var(--color-background); */
 }
 
 .gradientBlur {
@@ -21,6 +20,14 @@
   position: relative;
 
   padding-bottom: calc(var(--gap) * 1.7);
+}
+
+.subtitle2 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  font-size: 1.2rem;
 }
 
 .leftLine {
@@ -108,8 +115,9 @@
 
   .coins {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: center;
+
     flex-wrap: wrap;
     column-gap: 0.25rem;
     row-gap: 16px;

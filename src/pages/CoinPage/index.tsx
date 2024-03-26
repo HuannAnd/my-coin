@@ -1,24 +1,12 @@
 import ResetPageScrollPosition from "@/common/components/layouts/ResetPageScrollPosition"
 import useMetamaskHandles from "@/common/hooks/useMetaMaskHandles"
 
-import useCoin from "./hooks/useCoin"
-import mockedCoin from "@/mocks/coin.json"
 import { useSDK as useMetaMask } from "@metamask/sdk-react"
 import Sidebar from "./components/sections/Sidebar/Sidebar"
 import CanddleStickGraphic from "./components/sections/CanddleStickGraphic/CanddleStickGraphic"
 
 import styles from "./styles.module.css"
-import { useState } from "react"
-import { ICoin } from "@/services/responses/CoinGeckoResponses"
-
-// Typagem rigorosa de data
-// interface Props<
-//   TKey extends keyof ICoin,
-//   TTypeOfKey extends ICoin[TKey]
-// > {
-//   data: TTypeOfKey
-//   who: string
-// }
+import useCoin from "./hooks/useCoin"
 
 interface Props {
   data: any,
@@ -39,17 +27,18 @@ export default function CoinPage() {
   // const { account, balance, chainId, connected } = useMetaMask()
   // const { handleConnect, handleDisconnect } = useMetamaskHandles()
 
-  // const coin = useCoin()
-  const [coin] = useState(mockedCoin)
+  const coin = useCoin()
+  // const [coin.market_data. = useState(mockedCoin)
 
   if (!coin) return <p>Loading...</p>
-  console.log("current coin:", coin)
+  console.log("current coin.market_data.", coin)
 
-  // const lastPriceRegisteredinDolar = coin?.tickers[0].converted_last.usd
-  // console.log(
-  //   lastPriceRegisteredinDolar?.toString(),
-  //   lastPriceRegisteredinDolar
-  // )
+  const lastPriceRegisteredinDolar = coin.tickers[0].converted_last.usd
+  console.log(
+    lastPriceRegisteredinDolar?.toString(),
+    lastPriceRegisteredinDolar
+  )
+
 
   return (
     <ResetPageScrollPosition>
@@ -70,15 +59,15 @@ export default function CoinPage() {
                 </span>
               </div>
               <ul className={styles.info}>
-                <Data who="Marketing Cap" data={coin.market_cap} />
-                <Data who="Market Cap, Perc." data={coin.market_cap_change_percentage_24h}/>
-                <Data who="Circulating Supply" data={coin.circulating_supply}/>
-                <Data who="High Price" data={coin.high_24h}/>
-                <Data who="Low Price" data={coin.low_24h}/>
-                <Data who="Total Volume" data={coin.total_volume}/>
-                <Data who="Market Cap. Rank" data={coin.market_cap_rank}/>
-                <Data who="Diluation" data={coin.fully_diluted_valuation}/>
-                <Data who="Market Cap Change (1d)" data={coin.market_cap_change_percentage_24h}/>
+                {/* <Data who="Marketing Cap" data={coin.market_data.market_cap} />
+                <Data who="Market Cap, Perc." data={coin.market_data.market_cap_change_percentage_24h}/>
+                <Data who="Circulating Supply" data={coin.market_data.circulating_supply}/>
+                <Data who="High Price" data={coin.market_data.high_24h}/>
+                <Data who="Low Price" data={coin.market_data.low_24h}/>
+                <Data who="Total Volume" data={coin.market_data.total_volume}/>
+                <Data who="Market Cap. Rank" data={coin.market_data.market_cap_rank}/>
+                <Data who="Diluation" data={coin.market_data.fully_diluted_valuation}/>
+                <Data who="Market Cap Change (1d)" data={coin.market_data.market_cap_change_percentage_24h}/> */}
               </ul>
             </Sidebar.Root>
             <CanddleStickGraphic className={styles.canddleStickGraphic} />

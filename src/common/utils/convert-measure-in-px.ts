@@ -1,10 +1,11 @@
 export default function convertMeasureInPx(currStr: string) {
-  const numberExpression = Number(currStr)
+  const digitsAndPunctuation = currStr.replace(/[^\d\s.,!?]/g, "")
+  const currStrAsNumber = Number(digitsAndPunctuation)
+
   if (currStr.endsWith("px")) {
-    return numberExpression
-  }
-  else if (currStr.endsWith("vw")) {
-    const numExpInScale = numberExpression / 100;
+    return currStrAsNumber
+  } else if (currStr.endsWith("vw")) {
+    const numExpInScale = currStrAsNumber / 100
 
     return window.innerWidth * numExpInScale
   } else {
