@@ -2,7 +2,7 @@ import gsap from "gsap"
 import ScrollTrigger from "gsap/ScrollTrigger"
 
 import Lenis from "@studio-freight/lenis"
-import { createContext, useEffect, useLayoutEffect, useState } from "react"
+import { createContext, useLayoutEffect, useState } from "react"
 
 interface Props extends React.PropsWithChildren {}
 

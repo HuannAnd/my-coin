@@ -4,8 +4,9 @@ import Home from "./pages/Home"
 import CoinPage from "./pages/CoinPage"
 
 import ResetPageScrollPosition from "@/common/components/layouts/ResetPageScrollPosition"
+
+import Header from "@/common/components/sections/Header"
 import LenisScrollProvider from "./common/contexts/LenisScrollProvider"
-import Header from "@/common/components/sections/Header/Header"
 
 export default function App() {
   return (

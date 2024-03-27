@@ -9,6 +9,7 @@ export default function useCoin(): ICoinDetailsResponse | undefined {
 
   const { data: coin } = useQuery({
     queryKey: params.id,
+    refetchOnWindowFocus: false,
     queryFn: async () => await CoinGeckoHttpClient.getCoinDetails(params.id!),
   })
 

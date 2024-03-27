@@ -29,7 +29,7 @@ export default function Card({
   }
 
   return (
-    <article className={styles.card}>
+    <article className={styles.card} onClick={handleOnClick} {...rest}>
       <div className={styles.top}>
         <div className={styles.origin}>
           <span className={styles.address}>0x1</span>
@@ -45,14 +45,22 @@ export default function Card({
         <img className={styles.image} src={image} alt="Crypto image" />
         <div className={styles.about}>
           <p className={styles.name}>{name}</p>
-          <span className={styles.price}>
+          <span
+            data-percentage-status={percentageStatus}
+            className={styles.price}
+          >
             {" "}
             &#x24; {current_price.toFixed(2)} USD{" "}
           </span>
         </div>
         <div className={styles.info}>
           <span className={styles.birthdate}>USA 2022</span>
-          <span data-percentage-status="negative" className={styles.pricePercentageChange}>-7%</span>
+          <span
+            data-percentage-status="negative"
+            className={styles.pricePercentageChange}
+          >
+            -7%
+          </span>
         </div>
       </div>
       <div className={styles.bottom}>

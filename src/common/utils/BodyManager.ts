@@ -5,7 +5,7 @@ class BodyManager {
     private _body = document.body
   ) {} 
 
-  public setMetamaskDirection(
+  public setScrollDirection(
     newScrollDirection: "Up" | "Down"
   ): void {
     this._body.setAttribute("data-scroll-direction", newScrollDirection)

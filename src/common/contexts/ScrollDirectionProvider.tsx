@@ -1,4 +1,5 @@
 import { createContext, useLayoutEffect, useState } from "react"
+import BodyManager from "../utils/BodyManager"
 
 export const PageScrollDirectionContext = createContext<string | null>(null)
 
@@ -14,12 +15,14 @@ export default function PageScrollDirectionProvider({ children }: Props) {
       const currentScrollY = window.scrollY
 
       if (currentScrollY > lastScrollY) {
-        // esse data-scroll-direction modificar estilos no .module.css
+        // O Body manager ele ficar responsavel por gerenciar os estados do body com datasets:
+        // que servem para usar em estilizacoes no .module.css
+
         setDirection("Down")
-        document.body.setAttribute("data-scroll-direction", "Down")
+        BodyManager.setScrollDirection("Down")         
       } else if (currentScrollY < lastScrollY) {
         setDirection("Up")
-        document.body.setAttribute("data-scroll-direction", "Up")
+        BodyManager.setScrollDirection("Up")
       }
 
       lastScrollY = currentScrollY

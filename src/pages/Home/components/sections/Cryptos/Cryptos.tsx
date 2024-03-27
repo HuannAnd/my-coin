@@ -1,33 +1,17 @@
 import styles from "./Cryptos.module.css"
 
-import useCoins from "@/pages/Home/useCoins"
+import useCoins from "@/pages/Home/hooks/useCoins"
 
-import CryptosLoadingItemsOnScrollAnimation from "./CryptosLoadingItemsOnScrollAnimation"
-import GradientBlur from "@/common/components/molecules/GradientBlur"
+import CryptosLoadingContentOnViewAnimation from "./CryptosLoadingContentOnView.animation"
+import GradientBlur from "@/common/components/molecules/GridBlurred/GridBlurred"
 
-import CoinBar from "@/common/components/atoms/CoinBar/CoinBar"
-import CoinCard from "../../molecules/CoinCard/CoinCard"
-
-import { useMediaQuery } from "@/common/hooks/useMediaQuery"
-import MediaQueriesEnum from "@/common/enums/MediaQueriesEnum"
-import { useNavigate } from "react-router-dom"
-import { useCallback } from "react"
+import CoinsList from "../../organisms/CoinsList"
 
 export default function Cryptos() {
   const coins = useCoins()
-  const isMobile = useMediaQuery(MediaQueriesEnum.MOBILE)
-  const DisplayCoinFormat = CoinCard
-
-  const navigate = useNavigate()
-  
-  const redirectToCoinPage = useCallback((id: number | string) => {
-    navigate(`/coin/${id}`)
-  }, [navigate])
-  
-  if (!coins || coins?.length < 1) return <p>Loading...</p>
 
   return (
-    <CryptosLoadingItemsOnScrollAnimation>
+    <CryptosLoadingContentOnViewAnimation >
       <section className={styles.cryptos}>
         <GradientBlur className={styles.gradientBlur} />
         <div className={`${styles.upper} container`}>
@@ -36,13 +20,13 @@ export default function Cryptos() {
             <br />
             Is Quite Simple
           </h2>
+          <p>
+            Coins {" "}
+            <span>{coins.length > 0 ? coins.length : null}</span>
+          </p>
         </div>
-        <ul className={`${styles.coins} container`}>
-          {coins.map((x, i) => (
-            <DisplayCoinFormat key={`${DisplayCoinFormat.name}_${i}`} {...x} />
-          ))}
-        </ul>
+        <CoinsList className={`${styles.coins} container`}/>
       </section>
-    </CryptosLoadingItemsOnScrollAnimation>
+    </CryptosLoadingContentOnViewAnimation>
   )
 }
