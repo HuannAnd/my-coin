@@ -20,10 +20,6 @@ export default function Cryptos() {
             <br />
             Is Quite Simple
           </h2>
-          <p>
-            Coins {" "}
-            <span>{coins.length > 0 ? coins.length : null}</span>
-          </p>
         </div>
         <CoinsList className={`${styles.coins} container`}/>
       </section>

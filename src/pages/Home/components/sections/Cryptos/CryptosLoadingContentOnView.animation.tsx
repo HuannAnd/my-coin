@@ -9,7 +9,6 @@ import styles from "./Cryptos.module.css"
 import applyRefToChildren from "@/common/utils/apply-ref-to-children"
 import MediaQueriesEnum from "@/common/enums/MediaQueriesEnum"
 import initSlideUpByScope from "@/common/components/atoms/SlideUpTextFromView/initSlideUpByTimeline"
-import slideUpByScope from "@/common/components/atoms/SlideUpTextFromView/slideUpTextByTimeline"
 import slideUpTextByTimeline from "@/common/components/atoms/SlideUpTextFromView/slideUpTextByTimeline"
 
 interface Props extends React.PropsWithChildren {}
@@ -41,8 +40,6 @@ export default function CryptosLoadingContentOnViewAnimation({ children }: Props
         })
 
         context.add("onScrollView", () => {
-          console.log("ScrollTrigger onEnter has fired")
-
           slideUpTextByTimeline(timeline, {
             trigger: styles.subtitle,
             duration: TITLE_REVEAL_DURATION,
@@ -60,7 +57,7 @@ export default function CryptosLoadingContentOnViewAnimation({ children }: Props
         if (isMobile) {
           scrollTrigger = ScrollTrigger.create({
             trigger: ref.current,
-            markers: true,
+            // markers: true,
             once: true,
             start: "top center",
             onEnter: () => context.onScrollView(),
@@ -68,7 +65,7 @@ export default function CryptosLoadingContentOnViewAnimation({ children }: Props
         } else {
           scrollTrigger = ScrollTrigger.create({
             trigger: ref.current,
-            markers: true,
+            // markers: true,
             once: true,
             start: "top 35%",
             onEnter: () => context.onScrollView(),

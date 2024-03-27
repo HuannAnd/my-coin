@@ -18,8 +18,6 @@ class CoinGeckoHttpClient extends BaseHttpClient {
   }
 
   override createAuthHeader(token?: string) {
-    console.log("override of createAuthHeader works")
-
     if (!token) {
       throw new Error("Enviroment variable GECKOCOIN_API_KEY is undefined")
     }

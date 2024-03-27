@@ -3,8 +3,6 @@ import ScrollTrigger from "gsap/ScrollTrigger"
 
 import { useLayoutEffect, useRef } from "react"
 
-import styles from "./Header.module.css"
-
 import applyRefToChildren from "@/common/utils/apply-ref-to-children"
 
 // High order component para lidar com animacoes usando gsap e ScrollTrigger para o Header.;

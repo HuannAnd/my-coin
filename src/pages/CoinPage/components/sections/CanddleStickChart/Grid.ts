@@ -10,7 +10,7 @@ class Grid {
     private divisions: number,
     private width: number,
     private numerator = 1,
-    private isVertical: boolean = false
+    private isHorizontal: boolean = false
   ) {}
 
   public setNumerator(coeff: number) {
@@ -18,17 +18,17 @@ class Grid {
   }
 
   public draw(context: CanvasRenderingContext2D) {
-    const x0 = this.isVertical
+    const x0 = this.isHorizontal
       ? 0
       : this.numerator * (CANVAS_WIDTH / this.divisions + CANVAS_PADDING_X) +
         CANVAS_PADDING_X
-    const y0 = this.isVertical
-      ? this.numerator *
+    const y0 = this.isHorizontal
+      ? (this.numerator + 1)*
         ((CANVAS_HEIGHT - 2 * CANVAS_PADDING_Y) / CANVAS_VERTICAL_LINES_NUMBER)
-      : CANVAS_PADDING_Y
+      : 0
 
-    const x1 = this.isVertical ? CANVAS_WIDTH : x0
-    const y1 = this.isVertical ? y0 : CANVAS_HEIGHT + CANVAS_PADDING_Y
+    const x1 = this.isHorizontal ? CANVAS_WIDTH : x0
+    const y1 = this.isHorizontal ? y0 : CANVAS_HEIGHT + CANVAS_PADDING_Y
     const fill = CANVAS_GRID_LINE_COLOR
 
     context.strokeStyle = fill

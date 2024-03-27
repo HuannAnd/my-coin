@@ -16,10 +16,10 @@ export default function CoinBar({
   name,
   ...rest
 }: Props) {
-  // const navigate = useNavigate()
-  // const redirectToCoinPage = useCallback(() => {
-  //   navigate(`/coin/${id}`)
-  // }, [navigate])
+  const navigate = useNavigate()
+  const redirectToCoinPage = useCallback(() => {
+    navigate(`/coin/${id}`)
+  }, [navigate])
 
   return (
     <article className={`${className} ${styles.bar}`} {...rest}>

@@ -6,12 +6,12 @@ import styles from "./CoinPage.module.css"
 import useCoin from "./hooks/useCoin"
 
 import CoinDataInfoCollection from "./components/organisms/CoinDataInfoCollection"
+import Formats from "@/common/utils/Formats"
 
 export default function CoinPage() {
   const coin = useCoin()
 
   if (!coin) return <p>Loading...</p>
-  console.log("current coin.market_data.", coin)
 
   const lastPriceRegisteredinDolar = coin.tickers[0].converted_last.usd
 
@@ -29,9 +29,7 @@ export default function CoinPage() {
                 <span
                   className={styles.priceVariationInPercentage}
                   data-percentage-status="negative"
-                >
-                  {-0.077}%
-                </span>
+                >{Formats.percentageFormat(coin.market_data.price_change_24h_in_currency.usd.toFixed(4))}</span>
               </div>
               <CoinDataInfoCollection className={styles.info}/>
             </aside>

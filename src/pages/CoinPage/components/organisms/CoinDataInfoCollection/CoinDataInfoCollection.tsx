@@ -16,7 +16,7 @@ export default function CoinInfoCollectin({...rest}: Props) {
         data={Formats.priceFormat(coin.market_data.market_cap.usd)}
       />
       <Data
-        who="Market Cap, Perc."
+        who="Market Cap. P. Change"
         data={Formats.percentageFormat(
           coin.market_data.market_cap_change_percentage_24h
         )}

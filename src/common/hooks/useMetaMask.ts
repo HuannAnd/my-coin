@@ -1,11 +1,5 @@
 import { useSDK as useMetaMaskSDK } from "@metamask/sdk-react"
-import {
-  useCallback,
-  useEffect as useHandleSDKStatusEvent,
-  useLayoutEffect,
-  useState,
-} from "react"
-import useLenisScroll from "./useLenisScroll"
+import { useCallback } from "react"
 import { useQuery } from "react-query"
 import getEthereumBalance from "../utils/getEthreumBalance/getEthereumBalance"
 
@@ -40,6 +34,6 @@ export default function useMetaMaskHandles() {
     account,
     balance,
     sdk,
-    ...otherProperties
+    ...otherProperties,
   }
 }

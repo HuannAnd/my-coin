@@ -22,7 +22,6 @@ import HeaderAnimations from "./Header.animation"
 const BASE_ANIMATION_DURATION = 1.1
 
 export default function Header() {
-  console.log("Header was render")
 
   const [message, setMessage] = useState("Connect With")
   const {
@@ -116,7 +115,11 @@ export default function Header() {
             />
           </svg>
         </button>
-        <span className={styles.bar}>{balance} ETH</span>
+        {connected ? (
+          <span className={`${styles.bar} ${styles.balance}`}>
+            <b>{balance} </b> ETH
+          </span>
+        ) : null}
         <SlideUpLineOnTriggerOver.Root>
           <button
             disabled={connected}

@@ -14,7 +14,5 @@ export default function useCoinOHLC(): OHLC[] {
     queryFn: async () => await CoinGeckoHttpClient.getOHLCCoinSpecs(coinId!),
   })
 
-  console.log("ohlc coin data:", data)
-
   return data as OHLC[]
 }

@@ -6,10 +6,7 @@ import linearInterpolation from "@/common/utils/linear-interpolation"
 
 class CanddleStick {
   private normalize?: (num: number) => number
-  constructor(
-    private ohlc: OHLC, 
-    private index: number,
-    ) {}
+  constructor(private ohlc: OHLC, private index: number) {}
   public setNormalize(
     minPrice: number,
     maxPrice: number,
@@ -26,20 +23,21 @@ class CanddleStick {
       open: this.normalize!(this.ohlc.open),
       close: this.normalize!(this.ohlc.close),
     }
+    const scale = 1
 
     const x =
       this.index * (CANDDLE_WIDTH + SPACE_BET_CANDDLE) + SPACE_BET_CANDDLE
-    const openIsGreaterThanClose = ohlcMapped.open > ohlcMapped.close 
-    const y = openIsGreaterThanClose ? ohlcMapped.open : ohlcMapped.close
-    
+    const openIsGreaterThanClose = ohlcMapped.open > ohlcMapped.close
+    const y = !openIsGreaterThanClose ? ohlcMapped.open : ohlcMapped.close
+
     const width = CANDDLE_WIDTH
     const height = Math.abs(ohlcMapped.close - ohlcMapped.open)
 
-    const fill = openIsGreaterThanClose ? "#ff0000" : "#00ff00"
-    
+    const fill = !openIsGreaterThanClose ? "#ff0000" : "#00ff00"
+
     context.beginPath()
     context.fillStyle = fill
-    context.fillRect(x, y, width, height)
+    context.fillRect(scale * x, scale * y, scale * width, scale * height)
     context.fill()
 
     const strokeColor = fill
@@ -47,8 +45,8 @@ class CanddleStick {
     // Desenhando agora as sombras de low e high atraves de uma linha
     context.strokeStyle = strokeColor
     context.beginPath()
-    context.moveTo(x + CANDDLE_WIDTH / 2, ohlcMapped.low)
-    context.lineTo(x + CANDDLE_WIDTH / 2, ohlcMapped.high)
+    context.moveTo(scale * (x + CANDDLE_WIDTH / 2), scale * ohlcMapped.high)
+    context.lineTo(scale * (x + CANDDLE_WIDTH / 2), scale * ohlcMapped.low)
     context.stroke()
   }
 }

@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom"
 import styles from "./CoinCard.module.css"
 import useLenisScroll from "@/common/hooks/useLenisScroll"
 import CoinBar from "@/common/components/atoms/CoinBar/CoinBar"
+import Formats from "@/common/utils/Formats"
 
 interface Props extends ICoin {}
 export default function Card({
@@ -58,16 +59,13 @@ export default function Card({
           <span
             data-percentage-status="negative"
             className={styles.pricePercentageChange}
-          >
-            -7%
-          </span>
+          >{Formats.percentageFormat(price_change_percentage_24h)}</span>
         </div>
       </div>
       <div className={styles.bottom}>
         <span className={styles.details}>Details</span>
         <button onClick={handleOnClick} className={styles.viewMore}>
           <svg
-            // width="26"
             height="100%"
             viewBox="0 0 26 26"
             fill="none"

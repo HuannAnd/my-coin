@@ -2,17 +2,26 @@ import { useEffect, useRef, useState } from "react"
 
 import CanddleStick from "./CanddleStick"
 
-import useCoinOHLC from "@/common/hooks/useCoinOHLC"
-import useMinAndMaxPrices from "./useMinAndMaxPrice"
-
-import { CANVAS_HEIGHT, CANVAS_WIDTH } from "./CanddleStickChartMeasure"
+import {
+  CANVAS_HEIGHT,
+  CANVAS_HORIZONTAL_LINES,
+  CANVAS_VERTICAL_LINES,
+  CANVAS_WIDTH,
+} from "./CanddleStickChartMeasure"
 import Grid from "./Grid"
-import { useMediaQuery } from "@/common/hooks/useMediaQuery"
 import MediaQueriesEnum from "@/common/enums/MediaQueriesEnum"
-import useMockedOHSL from "@/common/hooks/useMockedOHLC"
+
+// import useMockedOHSL from "@/common/hooks/useMockedOHLC"
+import CanddleStickDate from "./TimeMetric"
 import { OHLC } from "@/common/types/OHLC"
 
-interface Props extends React.CanvasHTMLAttributes<HTMLCanvasElement> {}
+import useMinAndMaxPrices from "./useMinAndMaxPrice"
+import useCoinOHLC from "@/common/hooks/useCoinOHLC"
+import { useMediaQuery } from "@/common/hooks/useMediaQuery"
+import TimeAxis from "./TimeAxis"
+import PricesAxis from "./PricesAxis"
+
+interface Props extends React.CanvasHTMLAttributes<HTMLDivElement> {}
 
 export default function CanddleStickGraphic({ ...props }: Props) {
   const ref = useRef<HTMLCanvasElement>(null)
@@ -20,8 +29,7 @@ export default function CanddleStickGraphic({ ...props }: Props) {
 
   const [context, setContext] = useState<CanvasRenderingContext2D | null>(null)
 
-  // const ohlcPrices = useCoinOHLC()
-  const ohlcPrices = useMockedOHSL()
+  const ohlcPrices = useCoinOHLC()
   const { min, max } = useMinAndMaxPrices(ohlcPrices as OHLC[])
 
   useEffect(
@@ -31,24 +39,19 @@ export default function CanddleStickGraphic({ ...props }: Props) {
 
       if (context) {
         context.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT)
-        context.translate(0, CANVAS_HEIGHT)
-        context.scale(1, -1)
 
-        const gridLinesHorizontal = 10
-        const gridLinesVertical = 5
-
-        for (let h = 0; h < gridLinesVertical; h++) {
+        for (let h = 0; h < CANVAS_VERTICAL_LINES; h++) {
           const verticalGridLine = new Grid(
-            gridLinesVertical,
-            isMobile ? 3 : 1,
+            CANVAS_VERTICAL_LINES,
+            isMobile ? 5 : 1,
             h
           )
           verticalGridLine.draw(context)
         }
 
-        for (let v = 0; v < gridLinesHorizontal; v++) {
+        for (let v = 0; v < CANVAS_HORIZONTAL_LINES; v++) {
           const horizontalGridLine = new Grid(
-            gridLinesHorizontal,
+            CANVAS_HORIZONTAL_LINES,
             isMobile ? 5 : 1,
             v,
             true
@@ -56,11 +59,20 @@ export default function CanddleStickGraphic({ ...props }: Props) {
           horizontalGridLine.draw(context)
         }
 
-        ohlcPrices.splice(0, 5).forEach((x, i) => {
+        ohlcPrices.forEach((x, i) => {
           const canddleStick = new CanddleStick(x as OHLC, i)
           canddleStick.setNormalize(min, max, 0, CANVAS_HEIGHT)
           canddleStick.draw(context)
         })
+
+        // for (let vt = 0; vt < CANVAS_VERTICAL_LINES; vt++) {
+        //   const canddlestickDate = new CanddleStickDate(
+        //     CANVAS_VERTICAL_LINES,
+        //     ohlcPrices[vt].time,
+        //     vt
+        //   )
+        //   canddlestickDate.draw(context)
+        // }
 
         context.fill()
       } else {
@@ -71,7 +83,7 @@ export default function CanddleStickGraphic({ ...props }: Props) {
         context?.restore()
       }
     },
-    [context, ohlcPrices, isMobile]
+    [context, ohlcPrices]
   )
 
   useEffect(
@@ -91,11 +103,10 @@ export default function CanddleStickGraphic({ ...props }: Props) {
   )
 
   return (
-    <canvas
-      width={CANVAS_WIDTH}
-      height={CANVAS_HEIGHT}
-      ref={ref}
-      {...props}
-    ></canvas>
+    <div {...props}>
+      <canvas width={CANVAS_WIDTH} height={CANVAS_HEIGHT} ref={ref}/>
+      <PricesAxis/>
+      <TimeAxis />
+    </div>
   )
 }
