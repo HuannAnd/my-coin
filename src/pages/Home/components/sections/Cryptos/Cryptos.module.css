@@ -1,5 +1,13 @@
 .cryptos {
-  background-color: #eee;
+}
+
+.gradientBlur {
+  top: 0;
+  left: 0;
+
+  height: 100dvh;
+   
+  z-index: -1;
 }
 
 .upper {
@@ -9,8 +17,48 @@
 }
 
 .subtitle {
-  font-weight: 300;
-  font-family: var(--font-saburan);
+  position: relative;
+
+  padding-bottom: calc(var(--gap) * 1.7);
+}
+
+.subtitle2 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  font-size: 1.2rem;
+}
+
+.leftLine {
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  display: block;
+
+  height: 2.542em;
+}
+
+.displayOptions {
+  display: inline-block;
+  float: right;
+  vertical-align: text-bottom;
+  grid-template-columns: repeat(2, max(2.5vw, 48px));
+
+  padding-left: var(--gap);
+}
+
+.asCards {
+  display: inline-block;
+}
+
+.asPops {
+  display: inline-block;
+}
+
+.displayOptions:where(.cards, .pops) {
+  display: inline-block;
 }
 
 .counter {
@@ -25,10 +73,33 @@
 
 .coins {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(5, 1fr);
   gap: calc(2 * var(--gap));
 
   padding-top: calc(var(--gap) * 4);
+}
+
+@media (1024px < width <= 1200px) {
+  .coins {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+@media (768px < width <= 1024px) {
+  .coins {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (orientation: portrait) {
+  .gradientBlur {
+    top: 0;
+    right: 0;
+
+    height: auto;
+    width: 100vw;
+
+    transform: scaleX(-1);
+  }
 }
 
 @media (480px < width <= 768px) {
@@ -38,7 +109,18 @@
 }
 
 @media (width <= 480px) {
+  .displayOptions {
+    display: none;
+  }
+
   .coins {
-    grid-template-columns: repeat(1, 1fr);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    flex-wrap: wrap;
+    column-gap: 0.25rem;
+    row-gap: 16px;
+
   }
 }

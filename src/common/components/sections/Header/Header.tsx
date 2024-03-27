@@ -1,90 +1,153 @@
-import ethereumLogo from "@/assets/ethereum-logo.jpg"
-import baseFlag from "@/assets/brazil-flag.png"
-import myProfileImage from "@/assets/ProfileAvatar.png"
+import metamaskLogo from "@/assets/metamask-logo.png"
+import confettiEmoji from "@/assets/confetti-emoji.png"
+import ethereumLogo from "@/assets/ethereum-logo.png"
 
 import styles from "./Header.module.css"
 
-function LeftEdge() {
-  return (
-    <svg
-      className={styles.edgeLeft}
-      // width="100%"
-      height="100%"
-      viewBox="0 0 13 50"
-      fill="none"
-    >
-      <path fill="#eee" d="M0 50 L 13 50 L 13 0" />
-    </svg>
-  )
-}
-function RightEdge() {
-  return (
-    <svg
-      className={styles.edgeRight}
-      // width="100%"
-      height="100%"
-      viewBox="0 0 13 50"
-      fill="none"
-    >
-      <path fill="#eee" d="M13 0 L 0 0 L 0 50" />
-    </svg>
-  )
-}
+import gsap from "gsap"
 
-function Rovering() {
-  return (
-    <svg width="100%" className={styles.covering} viewBox="">
-      
-    </svg>
-  )
-}
+import { useCallback, useEffect, useState } from "react"
+import useLenisScroll from "@/common/hooks/useLenisScroll"
+import useMetamask from "@/common/hooks/useMetaMask"
+
+import SlideUpLineOnTriggerOver from "@/common/components/atoms/SlideUpLineOnTriggerOver"
+
+import { MetaMaskAvatar } from "react-metamask-avatar"
+import getConnectionStatus from "@/common/utils/get-connection-status"
+import { MetamaskConnectionStatusEnum } from "@/common/enums/MetamskEnums"
+import BodyManager from "@/common/utils/BodyManager"
+
+import HeaderAnimations from "./Header.animation"
+
+const BASE_ANIMATION_DURATION = 1.1
 
 export default function Header() {
+  console.log("Header was render")
+
+  const [message, setMessage] = useState("Connect With")
+  const {
+    account,
+    connected,
+    connecting,
+    balance,
+    connectWithMetamask,
+    disconnectWithMetamask,
+  } = useMetamask()
+  const lenis = useLenisScroll()
+
+  const connectionStatus = getConnectionStatus(connected, connecting)
+
+  useEffect(
+    function connectedWithSuccess() {
+      const timeline = gsap.timeline({
+        defaults: { ease: "power4.out", duration: BASE_ANIMATION_DURATION },
+      })
+
+      if (connected) {
+        setMessage("")
+        timeline.set(`.${styles.innerIcon}`, {
+          attr: {
+            src: confettiEmoji,
+          },
+          y: "0%",
+        })
+
+        timeline
+          .to(`.${styles.innerIcon}`, {
+            y: "-120%",
+            delay: 1,
+          })
+          .set(`.${styles.innerIcon}`, {
+            y: "120%",
+            attr: {
+              src: metamaskLogo,
+            },
+            onComplete: () => {
+              BodyManager.setMetamaskConnectionStatus(
+                MetamaskConnectionStatusEnum.CONNECTED
+              )
+              setMessage(account!)
+            },
+          })
+      }
+
+      return () => {
+        BodyManager.setMetamaskConnectionStatus(
+          MetamaskConnectionStatusEnum.WAITING
+        )
+        timeline.kill()
+      }
+    },
+    [connected, account]
+  )
+
+  const handleOnConnectWithMetaMask = useCallback(async () => {
+    try {
+      lenis?.stop()
+      await connectWithMetamask()
+      lenis?.start()
+    } catch (error) {
+      lenis?.start()
+      console.error(error)
+    }
+  }, [connectWithMetamask, lenis])
+
   return (
-    <header className={styles.header}>
-      <div className={styles.left}>
-        {/* <LeftEdge />
-        <RightEdge /> */}
-      </div>
-      <div className={styles.right}>
-        <LeftEdge />
-        <div className={styles.language}>
-          <img src={baseFlag} className={styles.flag} alt="Is a Country flag" />
-          <small className={styles.country}>BRL</small>
-        </div>
-        <div className={styles.profile}>
+    <HeaderAnimations>
+      <header className={styles.header}>
+        <button className={styles.bar}>
+          <img
+            className={styles.ethereumLogo}
+            src={ethereumLogo}
+            alt="Ethreum icon"
+          />
           <svg
-            className={styles.copyToClipboard}
-            width="19"
-            height="19"
-            viewBox="0 0 19 19"
+            className={styles.dropdownArrow}
+            height="36"
+            viewBox="0 0 26 26"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
           >
             <path
-              d="M1.67008 15.3146L0.417519 6.40214C0.18693 4.76141 1.33008 3.24441 2.97081 3.01382L7.21378 2.4175C8.85451 2.18692 10.3715 3.33006 10.6021 4.97079L11.8547 13.8832C12.0853 15.5239 10.9421 17.0409 9.30137 17.2715L5.0584 17.8678C3.41767 18.0984 1.90067 16.9553 1.67008 15.3146Z"
-              stroke="#CCCCCC"
-              stroke-width="0.75"
-            />
-            <path
-              d="M7.5 12.5V3.5C7.5 1.84315 8.84315 0.5 10.5 0.5H15C16.6569 0.5 18 1.84315 18 3.5V12.5C18 14.1569 16.6569 15.5 15 15.5H10.5C8.84315 15.5 7.5 14.1569 7.5 12.5Z"
-              fill="#EEEEEE"
-              stroke="#CCCCCC"
-              stroke-width="0.75"
+              d="M11 9L15 13L11 17"
+              stroke="white"
+              transform="rotate(90)"
+              transform-origin="13 13"
             />
           </svg>
-          <p className={styles.walletHashCode}>0x871d...</p>
-          <div className={styles.account}>
-            <img
-              className={styles.ethereum}
-              src={ethereumLogo}
-              alt="Ethereum logo"
-            />
-            <img className={styles.avatar} src={myProfileImage} alt="" />
-          </div>
-        </div>
-        <RightEdge />
-      </div>
-    </header>
+        </button>
+        <span className={styles.bar}>{balance} ETH</span>
+        <SlideUpLineOnTriggerOver.Root>
+          <button
+            disabled={connected}
+            onClick={
+              account && connected
+                ? handleOnConnectWithMetaMask
+                : disconnectWithMetamask
+            }
+            className={styles.connectWithMetamask}
+            data-metamask-connection-status={connectionStatus}
+          >
+            <span className={styles.innerText}>{message}</span>
+            <div className={styles.circle}>
+              {account ? (
+                <MetaMaskAvatar
+                  className={styles.avatar}
+                  address={account}
+                  size={24}
+                />
+              ) : null}
+              <SlideUpLineOnTriggerOver.Trigger>
+                <img
+                  className={styles.innerIcon}
+                  src={metamaskLogo}
+                  alt="Connect with Metamask.innerIcon logo"
+                />
+              </SlideUpLineOnTriggerOver.Trigger>
+            </div>
+          </button>
+        </SlideUpLineOnTriggerOver.Root>
+      </header>
+    </HeaderAnimations>
   )
 }

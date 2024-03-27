@@ -1,29 +1,32 @@
-import { ICoin } from "@/services/responses/CoinGeckoResponses"
 import styles from "./Cryptos.module.css"
 
-import useCoins from "@/pages/Home/useCoins"
-import CoinCard from "../../molecules/CoinCard/CoinCard"
+import useCoins from "@/pages/Home/hooks/useCoins"
 
-interface Props {}
+import CryptosLoadingContentOnViewAnimation from "./CryptosLoadingContentOnView.animation"
+import GradientBlur from "@/common/components/molecules/GridBlurred/GridBlurred"
+
+import CoinsList from "../../organisms/CoinsList"
 
 export default function Cryptos() {
   const coins = useCoins()
 
-  if (!coins || coins?.length < 1) return <p>Carregando ne pai</p>
-
   return (
-    <section className={styles.cryptos}>
-      <div className={`${styles.upper} container`}>
-        <h2 className={styles.subtitle}>
-          Cryptocurrencies
-          <span className={styles.counter}>10</span>
-        </h2>
-      </div>
-      <ul className={`${styles.coins} container`}>
-        {coins.map((x, i) => (
-          <CoinCard key={`coin_${i}`} {...x} />
-        ))}
-      </ul>
-    </section>
+    <CryptosLoadingContentOnViewAnimation >
+      <section className={styles.cryptos}>
+        <GradientBlur className={styles.gradientBlur} />
+        <div className={`${styles.upper} container`}>
+          <h2 className={styles.subtitle}>
+            Every Day Metaverse
+            <br />
+            Is Quite Simple
+          </h2>
+          <p>
+            Coins {" "}
+            <span>{coins.length > 0 ? coins.length : null}</span>
+          </p>
+        </div>
+        <CoinsList className={`${styles.coins} container`}/>
+      </section>
+    </CryptosLoadingContentOnViewAnimation>
   )
 }

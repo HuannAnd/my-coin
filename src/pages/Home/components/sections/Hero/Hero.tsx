@@ -1,16 +1,27 @@
+import ethereumSceneMockup from "@/assets/EthereumScene.png"
+
+import GradientBlur from "@/common/components/molecules/GridBlurred/GridBlurred"
+
 import styles from "./Hero.module.css"
 
-import CyanBlur from "./Blurs/CyanBlur/CyanBlur"
-import MagentaBlur from "./Blurs/MagentaBlur/MagentaBlur"
-import LightBlur from "./Blurs/LightBlur/LightBlur"
+import HeroPageTransition from "./HeroPageTransition.animation"
+import Title from "../../atoms/Title/Title"
 
 export default function Hero() {
   return (
-    <section className={styles.hero}>
-      <MagentaBlur className={styles.magentaBlur} />
-      <h1 className={styles.title}>ESPORTS WALLET</h1>
-      <LightBlur className={styles.lightBlur} />
-      <CyanBlur className={styles.cyanBlur} />
-    </section>
+    <HeroPageTransition>
+      <section className={styles.hero}>
+        <div className="container">
+          <img
+            className={styles.ethereumSceneMockup}
+            src={ethereumSceneMockup}
+            alt="Mockup Ethereum Scene"
+          />
+          <Title className={styles.title} />
+          <p className={styles.scrollDown}>SCROLL DOWN</p>
+        </div>
+        <GradientBlur className={styles.gradientBlur} />
+      </section>
+    </HeroPageTransition>
   )
 }
